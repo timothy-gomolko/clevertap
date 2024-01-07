@@ -39,11 +39,14 @@ class CleverTap
 
     def build_request_body
       records.each_with_object('d' => []) do |record, request_body|
+        p normalize_record(record)
         request_body['d'] << normalize_record(record)
       end.to_json
     end
 
     def normalize_record(record)
+      p record
+      p date_field
       ts = date_field ? record[date_field] : Time.now
 
       {
